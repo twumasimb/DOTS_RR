@@ -1,0 +1,8 @@
+.vscode/
+Qwen2-0.5B-Instruct-GRPO/
+output/
+trainer_output/
+
+
+torch_env.txt
+notes.md
