@@ -8,7 +8,11 @@ from trl import GRPOTrainer, GRPOConfig
 ## 1. Compute Embeddings for all questions prompt[contents] --> Before updating the prompts.
 ## 1.a Update the prompts with chat template to get the results needed. 
 ## 2. Sample from the indices of the embeddings 128 reference questions at random
-## 3. Rollouts on the sampled dataset. 
+## 3. Rollouts on the sampled dataset.
+##.   - Compute difficulty of rollouts scores
+## 4. Compute adaptive difficulty scores of full dataset wrt reference dataset. 
+## 5. Sample δ*budget
+## 6. Run GRPO
 
 
 
