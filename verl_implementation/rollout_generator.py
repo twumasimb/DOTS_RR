@@ -448,11 +448,32 @@ def pad_sequences(
     Returns:
         Padded tensor [total_batch, max_len]
     """
-    # Concatenate all sequences
-    all_seqs = torch.cat(sequences, dim=0)
+    if len(sequences) == 0:
+        raise ValueError("Cannot pad empty sequence list")
 
-    # Already same length within each batch, so just return
-    return all_seqs
+    if len(sequences) == 1:
+        return sequences[0]
+
+    # Find max sequence length across all tensors
+    max_len = max(seq.shape[1] for seq in sequences)
+
+    # Pad each tensor to max_len
+    padded = []
+    for seq in sequences:
+        curr_len = seq.shape[1]
+        if curr_len < max_len:
+            # Pad on the right (dim=1)
+            padding = torch.full(
+                (seq.shape[0], max_len - curr_len),
+                pad_value,
+                dtype=seq.dtype,
+                device=seq.device
+            )
+            seq = torch.cat([seq, padding], dim=1)
+        padded.append(seq)
+
+    # Concatenate all padded sequences
+    return torch.cat(padded, dim=0)
 
 
 def filter_informative_rollouts(

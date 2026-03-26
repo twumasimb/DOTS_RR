@@ -4,5 +4,7 @@ output/
 trainer_output/
 output_dots_rr_verl/
 
+**/*__pycache__/
+
 torch_env.txt
 notes.md
